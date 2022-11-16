@@ -3,12 +3,12 @@ import 'package:note_app/domain/model/note.dart';
 
 class NoteItem extends StatelessWidget {
   final Note note;
-  Function? onDeleteTap;
+  final VoidCallback onDeleteTap;
 
-  NoteItem({
+  const NoteItem({
     Key? key,
     required this.note,
-    this.onDeleteTap,
+    required this.onDeleteTap,
   }) : super(key: key);
 
   @override
@@ -47,7 +47,7 @@ class NoteItem extends StatelessWidget {
             bottom: 8,
             right: 8,
             child: GestureDetector(
-              onTap: onDeleteTap?.call(),
+              onTap: onDeleteTap,
               child: const Icon(Icons.delete),
             ),
           ),

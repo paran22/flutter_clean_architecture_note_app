@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/domain/model/note.dart';
 import 'package:note_app/presentation/add_edit_note/add_edit_note_screen.dart';
 import 'package:note_app/presentation/notes/components/note_item.dart';
+import 'package:note_app/presentation/notes/notes_event.dart';
 import 'package:note_app/presentation/notes/notes_view_model.dart';
-import 'package:note_app/ui/colors.dart';
 import 'package:provider/provider.dart';
 
 class NotesScreen extends StatelessWidget {
@@ -29,23 +28,53 @@ class NotesScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView(children: [
-          NoteItem(
-            note: Note(
-              title: 'title 1',
-              content: 'content 1',
-              color: wisteria.value,
-              timestamp: 1,
-            ),
-          )
-        ]),
+        child: ListView(
+          children: state.notes
+              .map(
+                (note) => GestureDetector(
+                  onTap: () async {
+                    bool? isSaved = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddEditNoteScreen(
+                          note: note,
+                        ),
+                      ),
+                    );
+                    if (isSaved != null && isSaved) {
+                      viewModel.onEvent(const NotesEvent.loadNotes());
+                    }
+                  },
+                  child: NoteItem(
+                    note: note,
+                    onDeleteTap: () {
+                      viewModel.onEvent(NotesEvent.deleteNote(note));
+                      final snackBar = SnackBar(
+                        content: const Text('노트가 삭제되었습니다'),
+                        action: SnackBarAction(
+                          label: '취소',
+                          onPressed: () {
+                            viewModel.onEvent(const NotesEvent.restoreNote());
+                          },
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    },
+                  ),
+                ),
+              )
+              .toList(),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          bool? isSaved = await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const AddEditNoteScreen()),
           );
+          if (isSaved != null && isSaved) {
+            viewModel.onEvent(const NotesEvent.loadNotes());
+          }
         },
         child: const Icon(Icons.add),
       ),

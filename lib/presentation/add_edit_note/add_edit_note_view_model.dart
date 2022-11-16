@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:note_app/domain/model/note.dart';
 import 'package:note_app/domain/repository/note_repository.dart';
 import 'package:note_app/presentation/add_edit_note/add_edit_note_event.dart';
+import 'package:note_app/presentation/add_edit_note/add_edit_note_ui_event.dart';
 import 'package:note_app/ui/colors.dart';
 
 class AddEditNoteViewModel with ChangeNotifier {
@@ -10,6 +13,11 @@ class AddEditNoteViewModel with ChangeNotifier {
   int _color = roseBud.value;
 
   int get color => _color;
+
+  //broadcast를 사용하면 여러번 listen할 수 있음
+  final _eventController = StreamController<AddEditNoteUiEvent>.broadcast();
+
+  Stream<AddEditNoteUiEvent> get eventStream => _eventController.stream;
 
   AddEditNoteViewModel(
     this.noteRepository,
@@ -25,6 +33,11 @@ class AddEditNoteViewModel with ChangeNotifier {
   }
 
   Future<void> _saveNote(int? id, String title, String content) async {
+    if (title.isEmpty || content.isEmpty) {
+      _eventController
+          .add(const AddEditNoteUiEvent.showSnackBar('제목이나 내용이 비어있습니다.'));
+    }
+
     if (id == null) {
       await noteRepository.insertNote(
         Note(
@@ -45,5 +58,7 @@ class AddEditNoteViewModel with ChangeNotifier {
         ),
       );
     }
+
+    _eventController.add(const AddEditNoteUiEvent.saveNote());
   }
 }
