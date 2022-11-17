@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NotesState {
   List<Note> get notes => throw _privateConstructorUsedError;
   NoteOrder get noteOrder => throw _privateConstructorUsedError;
+  bool get isOrderSectionVisible => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NotesStateCopyWith<NotesState> get copyWith =>
@@ -30,7 +31,8 @@ abstract class $NotesStateCopyWith<$Res> {
           NotesState value, $Res Function(NotesState) then) =
       _$NotesStateCopyWithImpl<$Res, NotesState>;
   @useResult
-  $Res call({List<Note> notes, NoteOrder noteOrder});
+  $Res call(
+      {List<Note> notes, NoteOrder noteOrder, bool isOrderSectionVisible});
 
   $NoteOrderCopyWith<$Res> get noteOrder;
 }
@@ -50,6 +52,7 @@ class _$NotesStateCopyWithImpl<$Res, $Val extends NotesState>
   $Res call({
     Object? notes = null,
     Object? noteOrder = null,
+    Object? isOrderSectionVisible = null,
   }) {
     return _then(_value.copyWith(
       notes: null == notes
@@ -60,6 +63,10 @@ class _$NotesStateCopyWithImpl<$Res, $Val extends NotesState>
           ? _value.noteOrder
           : noteOrder // ignore: cast_nullable_to_non_nullable
               as NoteOrder,
+      isOrderSectionVisible: null == isOrderSectionVisible
+          ? _value.isOrderSectionVisible
+          : isOrderSectionVisible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -80,7 +87,8 @@ abstract class _$$_NoteStateCopyWith<$Res>
       __$$_NoteStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Note> notes, NoteOrder noteOrder});
+  $Res call(
+      {List<Note> notes, NoteOrder noteOrder, bool isOrderSectionVisible});
 
   @override
   $NoteOrderCopyWith<$Res> get noteOrder;
@@ -99,6 +107,7 @@ class __$$_NoteStateCopyWithImpl<$Res>
   $Res call({
     Object? notes = null,
     Object? noteOrder = null,
+    Object? isOrderSectionVisible = null,
   }) {
     return _then(_$_NoteState(
       notes: null == notes
@@ -109,6 +118,10 @@ class __$$_NoteStateCopyWithImpl<$Res>
           ? _value.noteOrder
           : noteOrder // ignore: cast_nullable_to_non_nullable
               as NoteOrder,
+      isOrderSectionVisible: null == isOrderSectionVisible
+          ? _value.isOrderSectionVisible
+          : isOrderSectionVisible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -116,7 +129,10 @@ class __$$_NoteStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_NoteState implements _NoteState {
-  _$_NoteState({required final List<Note> notes, required this.noteOrder})
+  _$_NoteState(
+      {required final List<Note> notes,
+      required this.noteOrder,
+      required this.isOrderSectionVisible})
       : _notes = notes;
 
   final List<Note> _notes;
@@ -128,10 +144,12 @@ class _$_NoteState implements _NoteState {
 
   @override
   final NoteOrder noteOrder;
+  @override
+  final bool isOrderSectionVisible;
 
   @override
   String toString() {
-    return 'NotesState(notes: $notes, noteOrder: $noteOrder)';
+    return 'NotesState(notes: $notes, noteOrder: $noteOrder, isOrderSectionVisible: $isOrderSectionVisible)';
   }
 
   @override
@@ -141,12 +159,17 @@ class _$_NoteState implements _NoteState {
             other is _$_NoteState &&
             const DeepCollectionEquality().equals(other._notes, _notes) &&
             (identical(other.noteOrder, noteOrder) ||
-                other.noteOrder == noteOrder));
+                other.noteOrder == noteOrder) &&
+            (identical(other.isOrderSectionVisible, isOrderSectionVisible) ||
+                other.isOrderSectionVisible == isOrderSectionVisible));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_notes), noteOrder);
+      runtimeType,
+      const DeepCollectionEquality().hash(_notes),
+      noteOrder,
+      isOrderSectionVisible);
 
   @JsonKey(ignore: true)
   @override
@@ -158,12 +181,15 @@ class _$_NoteState implements _NoteState {
 abstract class _NoteState implements NotesState {
   factory _NoteState(
       {required final List<Note> notes,
-      required final NoteOrder noteOrder}) = _$_NoteState;
+      required final NoteOrder noteOrder,
+      required final bool isOrderSectionVisible}) = _$_NoteState;
 
   @override
   List<Note> get notes;
   @override
   NoteOrder get noteOrder;
+  @override
+  bool get isOrderSectionVisible;
   @override
   @JsonKey(ignore: true)
   _$$_NoteStateCopyWith<_$_NoteState> get copyWith =>

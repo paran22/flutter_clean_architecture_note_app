@@ -13,6 +13,7 @@ class NotesViewModel with ChangeNotifier {
     noteOrder: const NoteOrder.date(
       OrderType.descending(),
     ),
+    isOrderSectionVisible: false,
   );
 
   NotesState get state => _state;
@@ -28,6 +29,16 @@ class NotesViewModel with ChangeNotifier {
       loadNotes: _loadNotes,
       deleteNote: _deleteNote,
       restoreNote: _restoreNote,
+      changeOrder: (NoteOrder noteOrder) {
+        _state = state.copyWith(noteOrder: noteOrder);
+        _loadNotes();
+      },
+      toggleOrderSection: () {
+        _state = state.copyWith(
+          isOrderSectionVisible: !state.isOrderSectionVisible,
+        );
+        notifyListeners();
+      },
     );
   }
 

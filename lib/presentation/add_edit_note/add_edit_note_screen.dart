@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:note_app/domain/model/note.dart';
@@ -72,7 +71,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
         child: Padding(
           padding:
               const EdgeInsets.only(top: 48, left: 16, right: 16, bottom: 16),
-          child: Column(
+          child: ListView(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
