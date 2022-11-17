@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/di/provider_setup.dart';
-import 'package:note_app/presentation/notes/notes_screen.dart';
-import 'package:note_app/ui/colors.dart';
-import 'package:provider/provider.dart';
+import 'package:note_app/common/colors.dart';
+import 'package:note_app/presentation/notes/screen/notes_screen.dart';
 
 void main() async {
   //플렛폼 채널의 위젯 바인딩을 보장
   WidgetsFlutterBinding.ensureInitialized();
 
-  final providers = await getProviders();
-
   runApp(
-    MultiProvider(
-      providers: providers,
-      child: const MyApp(),
-    ),
+    const MyApp(),
   );
 }
 

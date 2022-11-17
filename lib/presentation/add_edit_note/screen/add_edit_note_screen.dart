@@ -1,11 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:note_app/common/colors.dart';
 import 'package:note_app/domain/model/note.dart';
-import 'package:note_app/presentation/add_edit_note/add_edit_note_event.dart';
-import 'package:note_app/presentation/add_edit_note/add_edit_note_view_model.dart';
-import 'package:note_app/ui/colors.dart';
-import 'package:provider/provider.dart';
 
 class AddEditNoteScreen extends StatefulWidget {
   final Note? note;
@@ -36,21 +33,6 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
       _titleController.text = widget.note!.title;
       _contentController.text = widget.note!.content;
     }
-    Future.microtask(() {
-      final viewModel = context.read<AddEditNoteViewModel>();
-      viewModel.eventStream.listen((event) {
-        event.when(saveNote: () {
-          if (mounted) {
-            Navigator.pop(context, true);
-          }
-        }, showSnackBar: (String message) {
-          final snackBar = SnackBar(
-            content: Text(message),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        });
-      });
-    });
   }
 
   @override
@@ -63,11 +45,10 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<AddEditNoteViewModel>();
     return Scaffold(
       body: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
-        color: Color(viewModel.color),
+        color: Colors.lightBlue,
         child: Padding(
           padding:
               const EdgeInsets.only(top: 48, left: 16, right: 16, bottom: 16),
@@ -78,13 +59,9 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
                 children: [
                   ...noteColors
                       .map((color) => InkWell(
-                          onTap: () {
-                            viewModel.onEvent(
-                                AddEditNoteEvent.changeColor(color.value));
-                          },
+                          onTap: () {},
                           child: _buildBackgroundColor(
-                              color: color,
-                              selected: viewModel.color == color.value)))
+                              color: color, selected: true)))
                       .toList()
                 ],
               ),
@@ -117,13 +94,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          viewModel.onEvent(AddEditNoteEvent.saveNote(
-            widget.note == null ? null : widget.note!.id,
-            _titleController.text,
-            _contentController.text,
-          ));
-        },
+        onPressed: () {},
         child: const Icon(Icons.save),
       ),
     );
