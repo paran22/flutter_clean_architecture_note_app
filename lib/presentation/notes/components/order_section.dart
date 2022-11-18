@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:note_app/domain/util/note_order.dart';
 import 'package:note_app/domain/util/order_type.dart';
 
-class OrderSection extends StatelessWidget {
+
+
+class OrderSection extends ConsumerWidget {
   final NoteOrder noteOrder;
   final Function(NoteOrder noteOrder) onOrderChanged;
 
@@ -13,7 +16,7 @@ class OrderSection extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         Row(

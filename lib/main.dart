@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:note_app/common/colors.dart';
 import 'package:note_app/presentation/notes/screen/notes_screen.dart';
 
@@ -7,7 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(
-    const MyApp(),
+    const ProviderScope(child: MyApp()),
   );
 }
 

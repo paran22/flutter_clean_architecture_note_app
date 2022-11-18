@@ -7,3 +7,11 @@ const skyBlue = Color(0xFF81DEEA);
 const illusion = Color(0xFFF48FB1);
 const darkGray = Color(0xFF202020);
 const lightBlue = Color(0xFFD7E8DE);
+
+final List<Color> noteColors = [
+  roseBud,
+  primrose,
+  wisteria,
+  skyBlue,
+  illusion,
+];

@@ -1,14 +1,25 @@
+import 'package:note_app/data/data_source/database_notifier.dart';
 import 'package:note_app/domain/model/note.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:sqflite/sqflite.dart';
 
-class NoteDbHelper {
-  Database db;
+final noteDbProvider = Provider<NoteDbHelper?>((ref) {
+  final database = ref.watch(databaseProvider);
+  ref.watch(databaseProvider.notifier).open();
+  if (database != null) {
+    return NoteDbHelper(database: database);
+  }
+  return null;
+});
 
-  NoteDbHelper(this.db);
+class NoteDbHelper {
+  Database database;
+
+  NoteDbHelper({required this.database});
 
   Future<Note?> getNoteById(int id) async {
     final List<Map<String, dynamic>> maps =
-        await db.query('note', where: 'id = ?', whereArgs: [id]);
+        await database.query('note', where: 'id = ?', whereArgs: [id]);
 
     if (maps.isNotEmpty) {
       return Note.fromJson(maps.first);
@@ -18,16 +29,16 @@ class NoteDbHelper {
   }
 
   Future<List<Note>> getNotes() async {
-    final maps = await db.query('note');
+    final maps = await database.query('note');
     return maps.map((map) => Note.fromJson(map)).toList();
   }
 
   Future<void> insertNote(Note note) async {
-    await db.insert('note', note.toJson());
+    await database.insert('note', note.toJson());
   }
 
   Future<void> updateNote(Note note) async {
-    await db.update(
+    await database.update(
       'note',
       note.toJson(),
       where: 'id = ?',
@@ -36,7 +47,7 @@ class NoteDbHelper {
   }
 
   Future<void> deleteNote(Note note) async {
-    await db.delete(
+    await database.delete(
       'note',
       where: 'id = ?',
       whereArgs: [note.id],
