@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:note_app/domain/model/note.dart';
-import 'package:note_app/domain/util/note_order.dart';
+import 'package:note_app/domain/model/note_order.dart';
 
 part 'notes_state.freezed.dart';
 

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:note_app/domain/model/notes_state.dart';
 import 'package:note_app/domain/repository/note_repository.dart';
-import 'package:note_app/domain/util/note_order.dart';
+import 'package:note_app/domain/model/note_order.dart';
+import 'package:note_app/domain/viewModel/notes_state_notifier.dart';
 import 'package:note_app/presentation/components/note_item.dart';
 import 'package:note_app/presentation/components/order_section.dart';
 import 'package:note_app/presentation/screen/add_edit_note_screen.dart';
-import 'package:note_app/presentation/viewModel/notes_state_notifier.dart';
 
 final _notesStateProvider =
     StateNotifierProvider<NotesStateNotifier, NotesState>((ref) {

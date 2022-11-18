@@ -1,9 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:note_app/domain/model/note.dart';
 import 'package:note_app/domain/model/notes_state.dart';
+import 'package:note_app/domain/model/order_type.dart';
 import 'package:note_app/domain/repository/note_repository.dart';
-import 'package:note_app/domain/util/note_order.dart';
-import 'package:note_app/domain/util/order_type.dart';
+import 'package:note_app/domain/model/note_order.dart';
 
 class NotesStateNotifier extends StateNotifier<NotesState> {
   final NoteRepository? repository;

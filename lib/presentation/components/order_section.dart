@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:note_app/domain/util/note_order.dart';
-import 'package:note_app/domain/util/order_type.dart';
+import 'package:note_app/domain/model/note_order.dart';
+import 'package:note_app/domain/model/order_type.dart';
 
 
 

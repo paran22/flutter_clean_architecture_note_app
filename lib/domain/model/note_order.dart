@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:note_app/domain/util/order_type.dart';
+import 'package:note_app/domain/model/order_type.dart';
 
 part 'note_order.freezed.dart';
 
