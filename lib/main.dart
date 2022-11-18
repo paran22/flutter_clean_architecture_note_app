@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:note_app/common/colors.dart';
-import 'package:note_app/presentation/notes/screen/notes_screen.dart';
+import 'package:note_app/presentation/screen/notes_screen.dart';
 
 void main() async {
   //플렛폼 채널의 위젯 바인딩을 보장

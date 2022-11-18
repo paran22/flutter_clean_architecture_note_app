@@ -5,8 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:note_app/common/colors.dart';
 import 'package:note_app/domain/model/note.dart';
 import 'package:note_app/domain/repository/note_repository.dart';
-import 'package:note_app/presentation/notes/viewModel/note_state_notifier.dart';
 import 'package:note_app/common/post_frame_mixin.dart';
+import 'package:note_app/presentation/viewModel/note_state_notifier.dart';
 
 final _colorProvider = StateProvider.autoDispose<int>((ref) => roseBud.value);
 
